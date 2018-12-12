@@ -1,5 +1,7 @@
 const faker = require('faker');
 
+let counter1 = 0;
+let counter2 = 0;
 let q1 = 17281;
 let q2 = 18363;
 let q3 = 16482;
@@ -29,11 +31,17 @@ const shuffle = array => {
 };
 
 const runtimeData = callback => {
+    if (temp1.length < 10) {
+        counter1++;
+    } else {
+        counter1 = 1;
+    }
     const runtime = random(0, 60);
     const planned = random(0, 60 - runtime);
     const unplanned = 60 - (runtime + planned);
     const dataShuffle = shuffle([runtime, planned, unplanned]);
     const data = {
+        id: counter1,
         runtime: dataShuffle[0],
         planned: dataShuffle[1],
         unplanned: dataShuffle[2]
@@ -42,6 +50,11 @@ const runtimeData = callback => {
 };
 
 const downtimeData = callback => {
+    if (temp2.length < 10) {
+        counter2++;
+    } else {
+        counter2 = 1;
+    }
     const cuc = random(0, 60);
     const cho = random(0, 60 - cuc);
     const pre = random(0, 60 - (cuc + cho));
@@ -50,6 +63,7 @@ const downtimeData = callback => {
     const dot = 60 - (cuc + cho + pre + set + het);
     const dataShuffle = shuffle([cuc, cho, pre, set, het, dot]);
     const data = {
+        id: counter2,
         cuc: dataShuffle[0],
         cho: dataShuffle[1],
         pre: dataShuffle[2],
